@@ -15,6 +15,11 @@ constructor(props) {
   };
 }
 
+deleteTodo(index) {
+  const list = this.state.todos.filter(todo => todo !== this.state.todos[index])
+  this.setState({ todos: list })
+}
+
 handleChange(e) {
   this.setState({ newTodoDescription: e.target.value })
 }
@@ -38,7 +43,7 @@ toggleComplete(index) {
       <div className="App">
         <ul>
           {this.state.todos.map( (todo, index) =>
-            <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } />
+            <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } deleteTodo={ () => this.deleteTodo(index) } toggleComplete={ () => this.toggleComplete(index) } />
           )}
         </ul>
         <form onSubmit={ (e) => this.handleSubmit(e) }>
